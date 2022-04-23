@@ -17,9 +17,13 @@ Hardwares:
 - Racecar: [Traxxas Slash 4X4 Ultimate](https://traxxas.com/products/models/electric/slash-4x4-ultimate)
 
 Softwares:
-- [JetPack 4.6.1](https://developer.nvidia.com/embedded/jetpack)
-- [ROS2](https://docs.ros.org/en/foxy/index.html)
-- [Docker](https://docs.docker.com/)
+---
+- ROS2 foxy + Ubuntu 20.04
+  - [JetPack 5.0](https://developer.nvidia.com/jetpack-sdk-50dp) is released and updated to Ubuntu 20.04.
+  - [ROS2](https://docs.ros.org/en/foxy/index.html)
+- ROS melodic + Ubuntu 18.04
+  - [JetPack 4.6.1](https://developer.nvidia.com/embedded/jetpack)
+  - [Docker](https://docs.docker.com/)
 
 Install system
 --------
