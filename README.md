@@ -1,4 +1,11 @@
-# Initialize
+F1TENTH docs
+---
+Thanks to mLAB UPenn for providing comprehensive documents on F1TENTH.  
+Most contents are from and linking to [F1TENTH TEAM](https://f1tenth.org/about.html) or 
+[F1TENTH github community](https://github.com/f1tenth).  
+Video resources from mLAB UPenn on [Youtube](https://www.youtube.com/user/RealTimemLAB).
+
+Because of hardware shortage, this repo is used for recording some adjustments and personal modifications. 
 
 Basic settings
 --------
