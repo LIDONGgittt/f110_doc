@@ -27,7 +27,8 @@ Softwares:
 
 Install system
 --------
-- Follow https://developer.nvidia.com/jetpack-sdk-461 to flush a pre-compiled system into the SD card.
+- Follow [JetPack 5.0](https://developer.nvidia.com/jetpack-sdk-50dp) or [JetPack 4.6.1](https://developer.nvidia.com/jetpack-sdk-461)
+to flush a pre-compiled system into the SD card.
 
 - Follow [link for ROS2](https://f1tenth.readthedocs.io/en/foxy_test/getting_started/firmware/index.html) to build the car
 and setup basic system.  
@@ -45,11 +46,14 @@ to connect desktop remotely.
 
 - Setup VESC: [link](https://f1tenth.readthedocs.io/en/foxy_test/getting_started/firmware/drive_workspace.html#udev-rules-setup)
 
-- Setup RealSense: [link](https://github.com/IntelRealSense/realsense-ros)
+- Setup RealSense: [link](https://github.com/IntelRealSense/realsense-ros)  
+  [Here](/SensorMount) is a personalized sensor mount to support both Lidar [Hokuyo UST-10LX](https://hokuyo-usa.com/products/lidar-obstacle-detection/ust-10lx)
+  and [Intel RealSense D345i](https://www.intelrealsense.com/depth-camera-d435i/) on the car. This model can fit well to the
+  [Platform Deck V3](https://drive.google.com/drive/u/1/folders/1m6JuSgbCYWefAvTAbb9SPebGBG61cLQo). 
 
 - Install driver for DualShock 4 (PS4) Bluetooth controller: [link1](http://wiki.ros.org/ds4_driver), [link2](http://willshw.me/2018/12/24/connect-ps4-joystick.html),
 [github](https://github.com/naoki-mizuno/ds4_driver)  
-Connect to DS4 . It is suggested to connect using a remote desktop.   
+Connect to DS4: It is suggested to connect using a remote desktop.   
 Here is another way to connect without desktop, ***be aware that this may cause unexpected and serious communication delay*** :
   1. Press *SHARE* and *PS* buttons simultaneously to enter pair mode
   2. Open a new shell window and run `>$ duso ds4drv` to connect automatically 
