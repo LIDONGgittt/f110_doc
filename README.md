@@ -15,6 +15,7 @@ Hardwares:
   - Lidar: [Hokuyo UST-10LX](https://hokuyo-usa.com/products/lidar-obstacle-detection/ust-10lx)
   - Camera: [Intel RealSense D345i](https://www.intelrealsense.com/depth-camera-d435i/)
 - Racecar: [Traxxas Slash 4X4 Ultimate](https://traxxas.com/products/models/electric/slash-4x4-ultimate)
+- Joystick: [DualShock 4 (PS4)](https://www.playstation.com/en-us/accessories/dualshock-4-wireless-controller/) Bluetooth controller
 
 Softwares:
 ---
@@ -34,7 +35,7 @@ to flush a pre-compiled system into the SD card.
 and setup basic system.  
 This is the [link](https://f1tenth.org/build.html) for ROS1 and Ubuntu Melodic version.  
 To avoid using _sudo_ before every docker command, add user to the docker group:  
-```sudo usermod -aG docker ${USER}```  
+```>$ sudo usermod -aG docker ${USER}```  
 Re-login to activate the changes.  
 [Nvidia docker container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
@@ -47,6 +48,9 @@ to connect desktop remotely.
 - Setup VESC: [link](https://f1tenth.readthedocs.io/en/foxy_test/getting_started/firmware/drive_workspace.html#udev-rules-setup)
 
 - Setup RealSense: [link](https://github.com/IntelRealSense/realsense-ros)  
+  1. First is to install librealsense SDK. There is no official repo supporting Ubuntu 20.04 Focal. It is suggested to
+  build librealsense from source. [tutorial](https://robots.uc3m.es/installation-guides/install-realsense2.html#install-realsense2-from-sources-ubuntu-1404-trusty-and-2004-bionic)
+- RealSense Mount: 
   [Here](/SensorMount) is a personalized sensor mount to support both Lidar [Hokuyo UST-10LX](https://hokuyo-usa.com/products/lidar-obstacle-detection/ust-10lx)
   and [Intel RealSense D345i](https://www.intelrealsense.com/depth-camera-d435i/) on the car. This model can fit well to the
   [Platform Deck V3](https://drive.google.com/drive/u/1/folders/1m6JuSgbCYWefAvTAbb9SPebGBG61cLQo). 
@@ -64,5 +68,16 @@ Drive the car manually
 
 
 Applications
---------
+---
 SLAM: [link](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam)
+
+Tips
+---
+- If some nodes keep running for a long time (more than 2 hours), `ros2 node list` / `ros2 topic list` might return
+  empty or not-complete info, try to restart the ros2 daemon.   
+  `>$ ros2 daemon stop`  
+  `>$ ros2 daemon start`  
+  Or check [this](https://fast-dds.docs.eprosima.com/en/latest/fastdds/ros2/discovery_server/ros2_discovery_server.html#ros-2-introspection).
+- Python version control via ANACONDA for arm64 [link](https://docs.anaconda.com/anaconda/install/graviton2/)
+- Use `--symlink-install` to saves you from having to rebuild every time you tweak python scripts
+- For configs, create a symbolic link in the install/package_name/share folder to apply changes without need to rebuild the package 
