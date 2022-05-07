@@ -26,14 +26,12 @@ Softwares:
   - [JetPack 4.6.1](https://developer.nvidia.com/embedded/jetpack)
   - [Docker](https://docs.docker.com/)
 
-Install system
+Install system: ROS melodic + Ubuntu 18.04
 --------
 - Follow [JetPack 5.0](https://developer.nvidia.com/jetpack-sdk-50dp) or [JetPack 4.6.1](https://developer.nvidia.com/jetpack-sdk-461)
 to flush a pre-compiled system into the SD card.
 
-- Follow [link for ROS2](https://f1tenth.readthedocs.io/en/foxy_test/getting_started/firmware/index.html) to build the car
-and setup basic system.  
-This is the [link](https://f1tenth.org/build.html) for ROS1 and Ubuntu Melodic version.  
+- Follow the [link](https://f1tenth.org/build.html) for ROS1 and Ubuntu Melodic version to build the car and setup basic system.    
 To avoid using _sudo_ before every docker command, add user to the docker group:  
 ```>$ sudo usermod -aG docker ${USER}```  
 Re-login to activate the changes.  
