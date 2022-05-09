@@ -69,7 +69,8 @@ Drive the car manually
 
 Applications
 ---
-SLAM: [link](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam)
+SLAM: [link](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam)  
+Only run successfully with Jetpack 4.6.1 + Docker(ROS2). Refer to [ros1_jetpack4.6.1](https://github.com/LIDONGgittt/f110_doc/tree/ros1_jetpack4.6.1) branch
 
 Tips
 ---
