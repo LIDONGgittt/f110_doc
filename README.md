@@ -84,7 +84,7 @@ SLAM from NVIDIA-ISAAC: [link](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_vis
 - For the first time, clone [f1tenth_system](https://github.com/f1tenth/f1tenth_system/tree/foxy-devel) foxy-devel branch and initialize a container
   using script from `scripts/run_container.sh`. Refer to this [link](https://f1tenth.readthedocs.io/en/foxy_test/getting_started/firmware/drive_workspace_docker.html#) for docs from F1TENTH.
 - If exit the container, use `scripts/resume_container.sh` to restart and attach to the previous container.   
-> Make sure to do every step bellow in the docker container.
+> Make sure to do every step bellow in the docker container. <a name="tag_run_in_docker_container"></a>
 - First build and install realsense sdk [librealsense](https://github.com/IntelRealSense/librealsense) and [realsense-ros](https://github.com/IntelRealSense/realsense-ros/tree/ros2-beta) ros2 branch
 - Follow [QuickStart](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam#quickstart) to build the package manually. Some possible errors:
   - `vpi` related package not found:  
@@ -106,7 +106,13 @@ SLAM from NVIDIA-ISAAC: [link](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_vis
       ```
       This is needed when compiling and running the slam node. You do this in every shell or write them to `~/.bashrc`.
   - `colcon test` lots of package error or failed. (don't know why)
-- source underlay and `realsense_ros` and `isaac_ros` overlay, then the slam node is ready to go.
+- source underlay and `realsense_ros` and `isaac_ros` overlay, then the slam node is ready to go.  
+
+**Build from isaac_ros_common docker:**
+- Follow this [link](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_common/tree/main/scripts) to build a docker image,
+  this may take 5 hours or more for the first time.
+- After successfully creating the image, you can run a container from that image with a name of `isaac_ros_dev-$PLATFORM-container`
+- Follow steps [link](#tag_run_in_docker_container) to build the environments.
 
 Tips
 ---
