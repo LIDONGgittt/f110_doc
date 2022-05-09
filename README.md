@@ -28,14 +28,26 @@ Softwares:
 
 Install system: ROS melodic + Ubuntu 18.04
 --------
-- Follow [JetPack 5.0](https://developer.nvidia.com/jetpack-sdk-50dp) or [JetPack 4.6.1](https://developer.nvidia.com/jetpack-sdk-461)
+- Follow [JetPack 4.6.1](https://developer.nvidia.com/jetpack-sdk-461)
 to flush a pre-compiled system into the SD card.
 
-- Follow the [link](https://f1tenth.org/build.html) for ROS1 and Ubuntu Melodic version to build the car and setup basic system.    
+- Follow the [link](https://f1tenth.org/build.html) for ROS1 and Ubuntu Melodic version to build the car and setup basic system.  
 To avoid using _sudo_ before every docker command, add user to the docker group:  
 ```>$ sudo usermod -aG docker ${USER}```  
 Re-login to activate the changes.  
-[Nvidia docker container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+Follow this to install [Nvidia docker container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)    
+Configure `nvidia-container-runtime` as the default runtime for Docker by editing `/etc/docker/daemon.json` to include the following:  
+  ```
+    "runtimes": {
+      "nvidia": {
+        "path": "nvidia-container-runtime",
+        "runtimeArgs": []
+      }
+    },
+    "default-runtime": "nvidia"
+  ```  
+  Then restart the Docker service:  
+`sudo systemctl daemon-reload && sudo systemctl restart docker`
 
 - Install VNC server [vino-server](https://developer.nvidia.com/embedded/learn/tutorials/vnc-setup),
 or use remote desktop software [NoMachine](https://f1tenth.readthedocs.io/en/foxy_test/getting_started/software_setup/software_combine.html#using-a-remote-desktop)
@@ -67,7 +79,34 @@ Drive the car manually
 
 Applications
 ---
-SLAM: [link](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam)
+SLAM from NVIDIA-ISAAC: [link](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam)  
+**Build from f1tenth_stack docker image :**
+- For the first time, clone [f1tenth_system](https://github.com/f1tenth/f1tenth_system/tree/foxy-devel) foxy-devel branch and initialize a container
+  using script from `scripts/run_container.sh`. Refer to this [link](https://f1tenth.readthedocs.io/en/foxy_test/getting_started/firmware/drive_workspace_docker.html#) for docs from F1TENTH.
+- If exit the container, use `scripts/resume_container.sh` to restart and attach to the previous container.   
+> Make sure to do every step bellow in the docker container.
+- First build and install realsense sdk [librealsense](https://github.com/IntelRealSense/librealsense) and [realsense-ros](https://github.com/IntelRealSense/realsense-ros/tree/ros2-beta) ros2 branch
+- Follow [QuickStart](https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam#quickstart) to build the package manually. Some possible errors:
+  - `vpi` related package not found:  
+    Add nvidia repo (only valid for nvidia jetson NX + jetpack 4.6.1):  
+    ```
+    sudo add-apt-repository 'deb https://repo.download.nvidia.com/jetson/common r32.7 main'
+    sudo add-apt-repository 'deb https://repo.download.nvidia.com/jetson/t194 r32.7 main'
+    ```
+    Then use `apt install` to get missing packages
+  - `libcublas.so.10` not found:  
+    This shared library is located in the host system's dir: `/usr/local/cuda-10.2/targets/aarch64-linux/lib`,
+    but is not mounted to the docker container. You can try one of the 2 ways:
+    - Try to change the `scripts/run_container.sh` to mount this directory. (Not tested)  
+    - In the host OS, copy all files in `/usr/local/cuda-10.2/targets/aarch64-linux` to the shared directory. Then in the
+      container add the copied directory to PATH:
+      ```
+      export PATH=/f1tenth_ws/aarch64-linux/lib/stubs:/f1tenth_ws/aarch64-linux/lib${PATH:+:${PATH}}
+      export LD_LIBRARY_PATH=/f1tenth_ws/aarch64-linux/lib/stubs:/f1tenth_ws/aarch64-linux/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+      ```
+      This is needed when compiling and running the slam node. You do this in every shell or write them to `~/.bashrc`.
+  - `colcon test` lots of package error or failed. (don't know why)
+- source underlay and `realsense_ros` and `isaac_ros` overlay, then the slam node is ready to go.
 
 Tips
 ---
